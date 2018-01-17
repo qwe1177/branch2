@@ -6,6 +6,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');//清除编译文件
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const BUILD_PATH = 'dist';
+const HelloWorldPlugin = require('./plugins');
+
+
 
 const vendors = [
     'babel-polyfill', //ie9以及以上浏览量中支持promise等异步流程处理API
@@ -92,10 +95,11 @@ const webpackConfig = {
             },
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['commons','vendors'], // 公共模块的名称
+            name: ['commons','vendors'], // 公共模块的名称{
             minChunks: 2
         }),
         extractCSS,
+        new HelloWorldPlugin({options: true}),
     ],
 }
 
